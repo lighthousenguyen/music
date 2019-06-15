@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="vi">
   <head>
-    <title>Vntrip.vn - Đặt phòng khách sạn trực tuyến giá rẻ, khuyến mãi đến 75%</title>
+    <title>Mymusic</title>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -26,7 +26,7 @@
             		  $count = 0;
             		  $db = mysqli_connect("localhost", "root", "", "mymusic");
             		?>
-                  <div class="avatar"><img src="<?php 
+                  <div class="avatar"><img src="<?php
             		 $resultdb = mysqli_query($db, "select * from user where username ='$username'");
             		 $row = mysqli_fetch_array($resultdb);
         			echo $row["avatar-us"];
@@ -38,16 +38,16 @@
                   <div class="text-imformation">
                     <div class="item-text">
                       <p>Songs</p><span class="orange">
-                      
-                      <?php 
-                		 $resultdb = mysqli_query($db, "SELECT count(idsong) FROM `user-song` WHERE idus =1");
-                		 $row = mysqli_fetch_array($resultdb);
-            			 echo $row["count(idsong)"];
-                		?></span>
+
+                      <?php
+                  		    $resultdb = mysqli_query($db, "SELECT count(idsong) FROM `user-song` WHERE idus =1");
+                  		    $row = mysqli_fetch_array($resultdb);
+              			      echo $row["count(idsong)"];
+                  		?></span>
                     </div>
                     <div class="item-text">
                       <p>Friends</p><span class="orange">
-						<?php 
+						<?php
                 		 $resultdb = mysqli_query($db, "SELECT (count(*)/2) FROM `friend` WHERE iduser1 =1 or iduser2 = 1");
                 		 $row = mysqli_fetch_array($resultdb);
                 		 echo number_format($row["(count(*)/2)"]);
@@ -154,7 +154,7 @@
               <div class="list-abum">
                 <div class="container">
                   <div class="row">
-                  <?php 
+                  <?php
             		 $resultdb = mysqli_query($db, "select *, count(`album-song`.idsong) from album, `album-song` where album.idal =1 and album.idal = `album-song`.idal");
             		  while ((($row = mysqli_fetch_array($resultdb))!= null) && ($count <= 10)){
             		      $count++;
@@ -163,12 +163,12 @@
                       <div class="abum-item">
                         <div class="abum-img"><img src="<?php echo $row["avatar-al"];?>"></div>
                         <div class="abum-text">
-                          <p class="title"><?php 
+                          <p class="title"><?php
                     		  echo $row["nameal"];
                     		?></p>
                           <div class="all-song">
                             <div class="songs">
-                            	<?php 
+                            	<?php
                         		  echo $row["count(`album-song`.idsong)"];
                         		?> songs
                             </div>
@@ -176,7 +176,7 @@
                         </div>
                       </div>
                     </div>
-                    <?php 
+                    <?php
             		  }
             		?>
                     <div class="col-lg-3">
@@ -389,7 +389,7 @@
                 </div>
               </div>
               <div class="list-song">
-              			<?php 
+              			<?php
                 	       $resultdb = mysqli_query($db, "select * from song where idsong =1");
                 		  while (($row = mysqli_fetch_array($resultdb))!= null){
                 		?>
@@ -401,27 +401,27 @@
                   <i class="fa fa-play" id="button-play"></i>
                     <div class="name-song">
                       <p class="text-name">
-                            <?php 
+                            <?php
                               echo $row["namesong"];
                             ?>
                       </p><span class="author">
-                            <?php 
+                            <?php
                               echo $row["tacgia"];
                             ?>
                           </span>
                     </div>
                   </div>
                   <div class="time-song">
-                  			<?php 
+                  			<?php
                               echo $row["tg"];
                             ?>
                    </div>
                 </div>
-                	<?php 
+                	<?php
             		  }
             		?>
-            		
-            		<?php 
+
+            		<?php
                 		$resultdb = mysqli_query($db, "select * from song where idsong =1");
                 		while (($row = mysqli_fetch_array($resultdb))!= null){
             		?>
@@ -439,7 +439,7 @@
                   </div>
                   <div class="time-song"><?php echo $row['tg']?></div>
                 </div>
-                <?php 
+                <?php
                 		}
                 ?>
                 <div class="item-song">
@@ -586,18 +586,18 @@
     <script type="text/javascript" src="main.js"></script>
     <script>
 
-    function playAudio(id) { 
-        var x = document.getElementById(id+"-song"); 
+    function playAudio(id) {
+        var x = document.getElementById(id+"-song");
         if(x.paused){
         	x.play();
-        	$("#button-play").attr("class", "fa fa-play"); 
+        	$("#button-play").attr("class", "fa fa-play");
         }
         else
         {
             x.pause();
         	$("#button-play").attr("class", "fa fa-pause");
         }
-    } 
+    }
     </script>
   </body>
 </html>
