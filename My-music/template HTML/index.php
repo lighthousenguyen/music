@@ -10,9 +10,12 @@
     <!-- Favicon-->
     <link ref="icon" sizes="16x16" href="">
     <link rel="stylesheet" href="css/index.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/libs/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/libs/bootstrap-4.0.0.min.js"></script>
+    <script type="text/javascript" src="js/libs/slick.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </head>
-  <body>
+  <body style="background-image:  url('background.png');">
     <?php
                         $username = "admin";
             		  $count = 0;
@@ -21,7 +24,7 @@
     <div class="page-body">
       <div class="container">
         <div class="row">
-
+          
           <div class="col-lg-9 pad-left">
             <div class="content-two">
               <div class="banner">
@@ -34,17 +37,17 @@
                 <form>
                   <div class="header-search-group">
                     <label><i class="fa fa-search"></i>
-                      <input action="search.php" method="GET" name="query" type="text" placeholder="Nhập tên bài hát, ca sĩ hoặc video…" class="form-control z-input-placeholder">
-                      <!-- <button type="submit" class="btn btn-primary" name="submit-search">Search</button> -->
+                      <input type="text" autocomplete="off" aria-autocomplete="list" aria-controls="react-autowhatever-1" placeholder="Nhập tên bài hát...." value="" class="form-control z-input-placeholder">
                     </label>
                   </div>
                 </form>
               </div>
               <div class="list-abum">
                 <div class="container">
-                  <div class="row">
-                  <?php
-            		 $resultdb = mysqli_query($db, "select album.idal, album.avataral, nameal, COUNT(`album-song`.idsong) from album, `album-song` where album.idal = `album-song`.idal group by `album-song`.idal");
+                  <div class="row" id="fuck">
+                  <?php 
+            		 $resultdb = mysqli_query($db, "select album.idal, album.avataral, nameal, COUNT(`album-song`.idsong) from album, `album-song` where album.idal = `album-song`.idal group by `album-song`.idal
+");
             		  while (($row = mysqli_fetch_array($resultdb))!= null){
             		?>
                     <div class="col-lg-3">
@@ -52,12 +55,12 @@
                       <div class="abum-item">
                         <div class="abum-img"><img src="<?php echo $row["avataral"];?>" width="127.500" height="127.500"></div>
                         <div class="abum-text">
-                          <p class="title"><?php
+                          <p class="title"><?php 
                     		  echo $row["nameal"];
                     		?></p>
                           <div class="all-song">
                             <div class="songs">
-                            	<?php
+                            	<?php 
                         		  echo $row["COUNT(`album-song`.idsong)"];
                         		?> songs
                             </div>
@@ -66,7 +69,7 @@
                       </div>
                       </a>
                     </div>
-                    <?php
+                    <?php 
             		  }
             		?>
                     <div class="col-lg-3">
@@ -92,12 +95,10 @@
               <div class="play-song">
                 <div class="background-song"><img src="images/hoang-hon-1.jpg"></div>
                 <div class="play-pause"><i class="fa fa-backward" onclick="forward();"></i><i class="fa fa-play pause" onclick="playcurrAudio();"></i><i class="fa fa-forward" onclick="reward();"></i></div>
-                <div class="name-song">
-                  <p class="text-name">I Do</p><span class="author">911 Band</span>
-                </div>
+                
               </div>
               <div class="list-song">
-              			<?php
+              			<?php 
               			   $id = 2;
                 	       $resultdb = mysqli_query($db, "select * from song");
                 		  while (($row = mysqli_fetch_array($resultdb))!= null){
@@ -110,46 +111,42 @@
                   <i class="fa fa-play" id="button-play"></i>
                     <div class="name-song">
                       <p class="text-name">
-                            <?php
+                            <?php 
                               echo $row["namesong"];
                             ?>
                       </p><span class="author">
-                            <?php
+                            <?php 
                               echo $row["tacgia"];
                             ?>
                           </span>
                     </div>
                   </div>
                   <div class="time-song">
-                  			<?php
+                  			<?php 
                               echo $row["tg"];
                             ?>
                    </div>
                 </div>
-                	<?php
+                	<?php 
             		  }
             		?>
-
-
-
+            		
+            		
+               
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="js/libs/jquery-3.2.1.slim.min.js"></script>
-    <script type="text/javascript" src="js/libs/bootstrap-4.0.0.min.js"></script>
-    <script type="text/javascript" src="js/libs/slick.js"></script>
-    <script type="text/javascript" src="main.js"></script>
     <script>
 	var x;
-    function playAudio(id) {
+    function playAudio(id) { 
         x = document.getElementById(id+"-song");
         document.getElementById("")
     }
-
-    function playcurrAudio() {
+    
+    function playcurrAudio() { 
     	if(x.paused){
         	x.play();
         }
@@ -162,10 +159,19 @@
 	function forward(){
 		x.currentTime = x.currentTime - 10;
 	}
-
+    
     function reward(){
 		x.currentTime = x.currentTime + 10;
     }
+    $('.fa-search').click(function(){
+        $('.fa-search').click(function(){
+            var insad;
+            var data_test = $('.z-input-placeholder').value;
+            $.post('php.php', {insad : 'data_test'},function(data){
+              $('#fuck').html(data);
+            });
+        });
+});
     </script>
   </body>
 </html>
