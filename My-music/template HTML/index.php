@@ -10,6 +10,7 @@
     <!-- Favicon-->
     <link ref="icon" sizes="16x16" href="">
     <link rel="stylesheet" href="css/index.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
   </head>
   <body>
     <?php
@@ -20,7 +21,7 @@
     <div class="page-body">
       <div class="container">
         <div class="row">
-          
+
           <div class="col-lg-9 pad-left">
             <div class="content-two">
               <div class="banner">
@@ -33,7 +34,8 @@
                 <form>
                   <div class="header-search-group">
                     <label><i class="fa fa-search"></i>
-                      <input type="text" autocomplete="off" aria-autocomplete="list" aria-controls="react-autowhatever-1" placeholder="Nhập tên bài hát, ca sĩ hoặc video…" value="" class="form-control z-input-placeholder">
+                      <input action="search.php" method="GET" name="query" type="text" placeholder="Nhập tên bài hát, ca sĩ hoặc video…" class="form-control z-input-placeholder">
+                      <!-- <button type="submit" class="btn btn-primary" name="submit-search">Search</button> -->
                     </label>
                   </div>
                 </form>
@@ -41,9 +43,8 @@
               <div class="list-abum">
                 <div class="container">
                   <div class="row">
-                  <?php 
-            		 $resultdb = mysqli_query($db, "select album.idal, album.avataral, nameal, COUNT(`album-song`.idsong) from album, `album-song` where album.idal = `album-song`.idal group by `album-song`.idal
-");
+                  <?php
+            		 $resultdb = mysqli_query($db, "select album.idal, album.avataral, nameal, COUNT(`album-song`.idsong) from album, `album-song` where album.idal = `album-song`.idal group by `album-song`.idal");
             		  while (($row = mysqli_fetch_array($resultdb))!= null){
             		?>
                     <div class="col-lg-3">
@@ -51,12 +52,12 @@
                       <div class="abum-item">
                         <div class="abum-img"><img src="<?php echo $row["avataral"];?>" width="127.500" height="127.500"></div>
                         <div class="abum-text">
-                          <p class="title"><?php 
+                          <p class="title"><?php
                     		  echo $row["nameal"];
                     		?></p>
                           <div class="all-song">
                             <div class="songs">
-                            	<?php 
+                            	<?php
                         		  echo $row["COUNT(`album-song`.idsong)"];
                         		?> songs
                             </div>
@@ -65,7 +66,7 @@
                       </div>
                       </a>
                     </div>
-                    <?php 
+                    <?php
             		  }
             		?>
                     <div class="col-lg-3">
@@ -96,7 +97,7 @@
                 </div>
               </div>
               <div class="list-song">
-              			<?php 
+              			<?php
               			   $id = 2;
                 	       $resultdb = mysqli_query($db, "select * from song");
                 		  while (($row = mysqli_fetch_array($resultdb))!= null){
@@ -109,28 +110,28 @@
                   <i class="fa fa-play" id="button-play"></i>
                     <div class="name-song">
                       <p class="text-name">
-                            <?php 
+                            <?php
                               echo $row["namesong"];
                             ?>
                       </p><span class="author">
-                            <?php 
+                            <?php
                               echo $row["tacgia"];
                             ?>
                           </span>
                     </div>
                   </div>
                   <div class="time-song">
-                  			<?php 
+                  			<?php
                               echo $row["tg"];
                             ?>
                    </div>
                 </div>
-                	<?php 
+                	<?php
             		  }
             		?>
-            		
-            		
-               
+
+
+
               </div>
             </div>
           </div>
@@ -143,12 +144,12 @@
     <script type="text/javascript" src="main.js"></script>
     <script>
 	var x;
-    function playAudio(id) { 
+    function playAudio(id) {
         x = document.getElementById(id+"-song");
         document.getElementById("")
     }
-    
-    function playcurrAudio() { 
+
+    function playcurrAudio() {
     	if(x.paused){
         	x.play();
         }
@@ -161,7 +162,7 @@
 	function forward(){
 		x.currentTime = x.currentTime - 10;
 	}
-    
+
     function reward(){
 		x.currentTime = x.currentTime + 10;
     }
