@@ -597,7 +597,26 @@
             x.pause();
         	$("#button-play").attr("class", "fa fa-pause");
         }
+
     }
+
+    function load_ajax(){
+        $.POST("php.php", {idus: '1', idsong: '2'})
+        $.post("php.php",{idus: '1', idsong: '2'}, function(data){
+        	$(".fa fa-heart").html(data);
+        });
+
+    }
+    $(fa-search).click(function(){
+    	$(document).ready(function () {
+            jQuery(".fa-search").click(function(){
+                var data_test = $(".z-input-placeholder").value;
+                $.POST("php.php",{in : in},function(data){
+                  $.(".row").html(data);
+                })
+            });
+        });
+    })
     </script>
   </body>
 </html>
